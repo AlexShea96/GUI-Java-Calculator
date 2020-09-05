@@ -216,31 +216,33 @@ public class Calculator {
         buttonEquals.setBounds(190, 295, 60, 60);
         buttonEquals.setBackground((new java.awt.Color(227,222,219)));
         buttonEquals.addActionListener(e -> {
-
-            if (operations.equals("+")) {
-                result = firstNum + secondNum;
-                answer = String.format("%.2f", result);
-                calField.setText(answer);
-            }
-            else if (operations.equals("-")) {
-                result = firstNum - secondNum;
-                answer = String.format("%.2f", result);
-                calField.setText(answer);
-            }
-            else if (operations.equals("*")) {
-                result = firstNum * secondNum;
-                answer = String.format("%.2f", result);
-                calField.setText(answer);
-            }
-            else if (operations.equals("/")) {
-                result = firstNum / secondNum;
-                answer = String.format("%.2f", result);
-                calField.setText(answer);
-            }
-            else if (operations.equals("%")) {
-                result = firstNum % secondNum;
-                answer = String.format("%.2f", result);
-                calField.setText(answer);
+            secondNum = Double.parseDouble(calField.getText());
+            switch (operations) {
+                case "+":
+                    result = firstNum + secondNum;
+                    answer = String.format("%.2f", result);
+                    calField.setText(answer);
+                    break;
+                case "-":
+                    result = firstNum - secondNum;
+                    answer = String.format("%.2f", result);
+                    calField.setText(answer);
+                    break;
+                case "*":
+                    result = firstNum * secondNum;
+                    answer = String.format("%.2f", result);
+                    calField.setText(answer);
+                    break;
+                case "/":
+                    result = firstNum / secondNum;
+                    answer = String.format("%.2f", result);
+                    calField.setText(answer);
+                    break;
+                case "%":
+                    result = firstNum % secondNum;
+                    answer = String.format("%.2f", result);
+                    calField.setText(answer);
+                    break;
             }
         });
 
