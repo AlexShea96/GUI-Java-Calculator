@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Calculator {
+
+    static double firstNum;
+    static double secondNum;
+    static double result;
+    static String operations;
+    static String answer;
+
     public static void main(String[] args) {
         JFrame calFrame = new JFrame();
         JPanel calPanel = new JPanel();
@@ -38,6 +45,11 @@ public class Calculator {
         JButton buttonPercent = new JButton("%");
         buttonPercent.setFont(new Font("Tahoma", Font.BOLD, 20));
         buttonPercent.setBounds(128, 61, 60, 60);
+        buttonPercent.addActionListener(e -> {
+            firstNum = Double.parseDouble(calField.getText());
+            calField.setText("");
+            operations = "%";
+        });
 
 
         //Plus Button
@@ -45,10 +57,11 @@ public class Calculator {
         buttonPlus.setFont(new Font("Tahoma", Font.BOLD, 20));
         buttonPlus.setBounds(190, 61, 60, 60);
         buttonPlus.setBackground((new java.awt.Color(255,159,10)));
-
-
-
-
+        buttonPlus.addActionListener(e -> {
+            firstNum = Double.parseDouble(calField.getText()); //textfield is stored in firstNum
+            calField.setText(""); //field is cleared upon being stored
+            operations = "+"; //operator
+        });
 
 
         //-----End of Row 1
@@ -85,6 +98,11 @@ public class Calculator {
         buttonMinus.setFont(new Font("Tahoma", Font.BOLD, 20));
         buttonMinus.setBounds(190, 120, 60, 60);
         buttonMinus.setBackground((new java.awt.Color(255,159,10)));
+        buttonMinus.addActionListener(e -> {
+            firstNum = Double.parseDouble(calField.getText());
+            calField.setText("");
+            operations = "-";
+        });
 
 
         //--------End of Row 2
@@ -120,6 +138,11 @@ public class Calculator {
         buttonMultiply.setFont(new Font("Tahoma", Font.BOLD, 20));
         buttonMultiply.setBounds(190, 178, 60, 60);
         buttonMultiply.setBackground((new java.awt.Color(255,159,10)));
+        buttonMultiply.addActionListener(e -> {
+            firstNum = Double.parseDouble(calField.getText());
+            calField.setText("");
+            operations = "*";
+        });
         //-----End of Row 3
         //-----Row 4
         ////Button #1
@@ -151,6 +174,11 @@ public class Calculator {
         buttonDivide.setFont(new Font("Tahoma", Font.BOLD, 20));
         buttonDivide.setBounds(190, 237, 60, 60);
         buttonDivide.setBackground((new java.awt.Color(255,159,10))); //Apple RGB
+        buttonDivide.addActionListener(e -> {
+            firstNum = Double.parseDouble(calField.getText());
+            calField.setText("");
+            operations = "/";
+        });
 
         //-----End of Row 4
 
@@ -177,14 +205,44 @@ public class Calculator {
         buttonDecimal.setFont(new Font("Tahoma", Font.BOLD, 20));
         buttonDecimal.setBounds(128, 295, 60, 60);
         buttonDecimal.addActionListener(e -> {
-            String EnterNumber = calField.getText() + buttonDecimal.getText();
-            calField.setText(EnterNumber);
+            if(!calField.getText().contains("."))
+            {
+                calField.setText(calField.getText() + buttonDecimal.getText());
+            }
         });
         //Equals Button
         JButton buttonEquals = new JButton("=");
         buttonEquals.setFont(new Font("Tahoma", Font.BOLD, 20));
         buttonEquals.setBounds(190, 295, 60, 60);
         buttonEquals.setBackground((new java.awt.Color(227,222,219)));
+        buttonEquals.addActionListener(e -> {
+
+            if (operations.equals("+")) {
+                result = firstNum + secondNum;
+                answer = String.format("%.2f", result);
+                calField.setText(answer);
+            }
+            else if (operations.equals("-")) {
+                result = firstNum - secondNum;
+                answer = String.format("%.2f", result);
+                calField.setText(answer);
+            }
+            else if (operations.equals("*")) {
+                result = firstNum * secondNum;
+                answer = String.format("%.2f", result);
+                calField.setText(answer);
+            }
+            else if (operations.equals("/")) {
+                result = firstNum / secondNum;
+                answer = String.format("%.2f", result);
+                calField.setText(answer);
+            }
+            else if (operations.equals("%")) {
+                result = firstNum % secondNum;
+                answer = String.format("%.2f", result);
+                calField.setText(answer);
+            }
+        });
 
         //-----End of Row 5
 
